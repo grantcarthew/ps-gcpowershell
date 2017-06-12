@@ -22,8 +22,12 @@ function Stop-GCWindowsUpdate {
   [Alias()]
   [OutputType([String])]
   Param() 
-  
-  $wu = Get-Service -Name wuauserv
-  Stop-Service -InputObject $wu
-  Set-Service -InputObject $wu -StartupType Disabled
+
+  Import-Module -Name GCTest
+
+  if (Test-GCAdminShell -PrintError) {
+    $wu = Get-Service -Name wuauserv
+    Stop-Service -InputObject $wu
+    Set-Service -InputObject $wu -StartupType Disabled
+  }
 }

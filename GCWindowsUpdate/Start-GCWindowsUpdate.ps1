@@ -23,12 +23,15 @@ function Start-GCWindowsUpdate {
   [OutputType([String])]
   Param() 
   
-  Import-Module -Name PSWindowsUpdate
+  Import-Module -Name GCTest
 
-  $wu = Get-Service -Name wuauserv
-  Set-Service -StartupType Automatic -InputObject $wu
-  Start-Service -InputObject $wu
+  if (Test-GCAdminShell -PrintError) {
+    Import-Module -Name PSWindowsUpdate
 
-  Get-WUInstall -AcceptAll
+    $wu = Get-Service -Name wuauserv
+    Set-Service -StartupType Automatic -InputObject $wu
+    Start-Service -InputObject $wu
+
+    Get-WUInstall -AcceptAll
+  }
 }
-  
