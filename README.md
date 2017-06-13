@@ -12,7 +12,7 @@ To prevent function name collisions, every function has a prefix of `GC` being m
 
 To install any of the modules within this repository type the following into a PowerShell console:
 
-```ps
+```PowerShell
 
 Install-Module -Name <module name> -Force
 
