@@ -7,9 +7,9 @@
 
   This function will return True if the PowerShell console is running as administrator. False otherwise.
 .PARAMETER PrintError
-  If set to True a console error is reported if the console is not running as administrator.
+  If present a console error is reported if the console is not running as administrator.
 #>
-function Test-AdminShell {
+function Test-GCAdminShell {
   [CmdletBinding()]
   [Alias()]
   [OutputType([Boolean])]
