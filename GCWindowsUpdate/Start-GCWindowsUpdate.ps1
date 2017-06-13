@@ -1,6 +1,7 @@
 <#
 .SYNOPSIS
   Starts the Windwos Update service (wuauserv) and downloads all available updates.
+
 .DESCRIPTION
   Due to the latest versions of Microsoft Windows being rather forward about applying
   updates and rebooting machines, this function allows you to install the updates on your own schedule.
@@ -15,7 +16,7 @@
 .EXAMPLE
   The following example installs all required updates on the local machine:
 
-  PS> Start-GCWindowsUpdate
+  > Start-GCWindowsUpdate
 #>
 function Start-GCWindowsUpdate {
   [CmdletBinding()]
@@ -23,7 +24,7 @@ function Start-GCWindowsUpdate {
   [OutputType([String])]
   Param() 
   
-  "Start-GCWindowsUpdate starting"
+  "Start-GCWindowsUpdate initiated"
   Import-Module -Name GCTest
 
   if (Test-GCAdminShell -PrintError) {

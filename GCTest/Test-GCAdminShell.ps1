@@ -1,11 +1,13 @@
 <#
 .SYNOPSIS
   Tests if the PowerShell console is running "As Administrator".
+
 .DESCRIPTION
   When running a PowerShell console you can launch it as a standard user or "as administrator".
   When run "as administrator", the console can make system changes to Windows.
 
   This function will return True if the PowerShell console is running as administrator. False otherwise.
+
 .PARAMETER PrintError
   If present a console error is reported if the console is not running as administrator.
 #>

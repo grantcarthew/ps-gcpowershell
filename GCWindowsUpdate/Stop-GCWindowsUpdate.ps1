@@ -1,21 +1,21 @@
 <#
 .SYNOPSIS
-  Completes the Windwos Update initiated by Start-WindowsUpdate.
+  Completes the Windwos Update initiated by Start-GCWindowsUpdate.
+
 .DESCRIPTION
   Due to the latest versions of Microsoft Windows being rather forward about applying
   updates and rebooting machines, this function allows you to install the updates on your own schedule.
 
-  Start-WindowsUpdate performs the following tasks:
-  -   Sets the Windows Update service, named wuauserv, to a StartType of Automatic
-  -   Starts the Windows Update Service
-  -   Downloads and installs all required Windows updates
+  Stop-GCWindowsUpdate performs the following tasks:
+  -   Stops the Windows Update service
+  -   Sets the Windows Update service, named wuauserv, to a StartType of Disabled
 
-  Rebooting after the updates is not forced and will most likely be required.
-
+  WARNING: Running this function will prevent your computer from receiving Windows Updates
+  until you either enable the Windows Update service or run the Start-GCWindowsUpdate function.
 .EXAMPLE
   The following example installs all required updates on the local machine:
 
-  PS> Start-WindowsUpdate
+  > Start-WindowsUpdate
 #>
 function Stop-WindowsUpdate {
   [CmdletBinding()]
@@ -23,11 +23,16 @@ function Stop-WindowsUpdate {
   [OutputType([String])]
   Param() 
 
+  "Stop-GCWindowsUpdate initiated"
   Import-Module -Name GCTest
 
   if (Test-GCAdminShell -PrintError) {
+    "Stopping the Windows Update service"
     $wu = Get-Service -Name wuauserv
     Stop-Service -InputObject $wu
+    "Disabling the Windows Update service"
     Set-Service -InputObject $wu -StartupType Disabled
   }
+
+  "Stop-GCWindowsUpdate completed"
 }
