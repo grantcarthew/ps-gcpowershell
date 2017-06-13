@@ -22,7 +22,7 @@ function Test-AdminShell {
   Write-Verbose -Message ("Identity Name: " + $identity.Name)
   $principal = New-Object Security.Principal.WindowsPrincipal $identity
   $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-  Write-Verbose -Object ("Running as Administrator: " + $isAdmin)
+  Write-Verbose -Message ("Running as Administrator: " + $isAdmin)
 
   if ($PrintError -and -not $isAdmin) {
     Write-Error -Message "Please run this function as administrator"
