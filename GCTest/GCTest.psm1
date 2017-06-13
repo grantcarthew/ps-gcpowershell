@@ -1,5 +1,4 @@
 # Get module script files
-Write-Host -Object "PSM1: $PSScriptRoot"
 $scripts = @( Get-ChildItem -Path $PSScriptRoot\*.ps1 -ErrorAction SilentlyContinue )
 
 #Dot source the script files

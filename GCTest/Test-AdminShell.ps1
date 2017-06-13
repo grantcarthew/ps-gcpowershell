@@ -19,12 +19,12 @@ function Test-AdminShell {
   ) 
   
   $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-  Write-Host -Object ("Identity Name: " + $identity.Name)
+  Write-Verbose -Message ("Identity Name: " + $identity.Name)
   $principal = New-Object Security.Principal.WindowsPrincipal $identity
   $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-  Write-Host -Object ("Running as Administrator: " + $isAdmin)
+  Write-Verbose -Object ("Running as Administrator: " + $isAdmin)
 
-  if ($PrintError) {
+  if ($PrintError -and -not $isAdmin) {
     Write-Error -Message "Please run this function as administrator"
   }
 
