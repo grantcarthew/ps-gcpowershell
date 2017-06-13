@@ -32,4 +32,4 @@ The GCTest module contains `Test-GC*` functions for basic True/False system test
 
 #### GCTest Functions
 
-*   [Test-GCAdminShell](blob/master/GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
+*   [Test-GCAdminShell](GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
