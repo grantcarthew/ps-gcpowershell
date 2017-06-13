@@ -6,7 +6,7 @@ An assortment of PowerShell modules
 
 This repository contains a collection of PowerShell modules that contain tools to help you work with the Windows platform. The modules have been published to the [PowerShell Gallery](https://www.powershellgallery.com).
 
-To prevent function name collisions every function has a prefix of `GC` being my initials.
+To prevent function name collisions, every function has a prefix of `GC` being my initials.
 
 ## Installation
 
@@ -32,5 +32,4 @@ The GCTest module contains `Test-GC*` functions for basic True/False system test
 
 #### GCTest Functions
 
-*   [Test-GCAdminShell]('/GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
-
+*   [Test-GCAdminShell](blob/master/GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
