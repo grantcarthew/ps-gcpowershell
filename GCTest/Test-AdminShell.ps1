@@ -9,7 +9,7 @@
 .PARAMETER PrintError
   If set to True a console error is reported if the console is not running as administrator.
 #>
-function Test-GCAdminShell {
+function Test-AdminShell {
   [CmdletBinding()]
   [Alias()]
   [OutputType([Boolean])]
