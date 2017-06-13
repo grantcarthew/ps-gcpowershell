@@ -4,7 +4,7 @@ An assortment of PowerShell modules
 
 ## Description
 
-This repository contains a collection of PowerShell modules that contain tools to help you work with the Windows platform. The modules have been published to the [PowerShell Gallery](https://www.powershellgallery.com).
+This repository contains a collection of PowerShell modules that contain tools to help you work with the Windows platform. The modules have been published to the [PowerShell Gallery](https://www.powershellgallery.com/items?q=grantcarthew).
 
 To prevent function name collisions, every function has a prefix of `GC` being my initials.
 
