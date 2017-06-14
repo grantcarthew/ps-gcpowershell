@@ -9,7 +9,7 @@
   This function will return True if the PowerShell console is running as Administrator, False otherwise.
 
 .PARAMETER PrintError
-  If this parameter is present a console error is reported if the console is not running as administrator.
+  If this parameter is present a console error is reported if the console is not running as Administrator.
 #>
 function Test-GCAdminShell {
   [CmdletBinding()]
@@ -28,7 +28,7 @@ function Test-GCAdminShell {
   Write-Verbose -Message ("Running as Administrator: " + $isAdmin)
 
   if ($PrintError -and -not $isAdmin) {
-    Write-Error -Message "Please run this function as administrator"
+    Write-Error -Message "Please run this console as Administrator"
   }
 
   Return $isAdmin
