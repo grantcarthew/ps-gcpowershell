@@ -33,3 +33,16 @@ The GCTest module contains `Test-GC*` functions for basic True/False system test
 #### GCTest Functions
 
 *   [Test-GCAdminShell](GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
+
+### GCWindowsUpdate
+
+This module contains functions to interact with the Windows Update service.
+
+I have lost data from open applications because Windows Update decided to reboot on me without retaining current state. After this happened a few times I decided to disable the Windows Update service. This worked well letting me update the platform when I wanted to update. After manually enabling and disabling the Windows Update service I wrote these functions.
+
+__Warning:__ Calling `Stop-GCWindowsUpdate` will disable the Windows Update background service. This will prevent your system from installing updates until you start the service or run `Start-GCWindowsUpdate`.
+
+#### GCWindowsUpdate Functions
+
+*   [Start-GCWindowsUpdate](GCWindowsUpdate/Start-GCWindowsUpdate.ps1): Downloads and installs update packages.
+*   [Stop-GCWindowsUpdate](GCWindowsUpdate/Stop-GCWindowsUpdate.ps1): Stops and disables the Windows Update service.
