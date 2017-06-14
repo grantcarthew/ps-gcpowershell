@@ -12,6 +12,7 @@
 
   WARNING: Running this function will prevent your computer from receiving Windows Updates
   until you either enable the Windows Update service or run the Start-GCWindowsUpdate function.
+
 .EXAMPLE
   The following example installs all required updates on the local machine:
 
@@ -30,6 +31,7 @@ function Stop-GCWindowsUpdate {
     "Stopping the Windows Update service"
     $wu = Get-Service -Name wuauserv
     Stop-Service -InputObject $wu
+
     "Disabling the Windows Update service"
     Set-Service -InputObject $wu -StartupType Disabled
   }

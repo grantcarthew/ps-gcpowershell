@@ -7,8 +7,8 @@
   updates and rebooting machines, this function allows you to install the updates on your own schedule.
 
   Start-GCWindowsUpdate performs the following tasks:
-  -   Sets the Windows Update service, named wuauserv, to a StartType of Automatic
-  -   Starts the Windows Update Service
+  -   Sets the Windows Update service, named wuauserv, to a StartupType of Automatic
+  -   Starts the Windows Update service
   -   Downloads and installs all required Windows updates
 
   Rebooting after the updates is not forced.
