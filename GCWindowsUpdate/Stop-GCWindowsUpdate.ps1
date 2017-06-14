@@ -15,9 +15,9 @@
 .EXAMPLE
   The following example installs all required updates on the local machine:
 
-  > Start-WindowsUpdate
+  > Start-GCWindowsUpdate
 #>
-function Stop-WindowsUpdate {
+function Stop-GCWindowsUpdate {
   [CmdletBinding()]
   [Alias()]
   [OutputType([String])]
