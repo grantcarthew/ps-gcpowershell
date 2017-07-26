@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Completes the Windwos Update initiated by Start-GCWindowsUpdate.
+  Completes the Windows Update initiated by Start-GCWindowsUpdate.
 
 .DESCRIPTION
   Due to the latest versions of Microsoft Windows being rather forward about applying
@@ -16,7 +16,7 @@
 .EXAMPLE
   The following example installs all required updates on the local machine:
 
-  > Start-GCWindowsUpdate
+  > Stop-GCWindowsUpdate
 #>
 function Stop-GCWindowsUpdate {
   [CmdletBinding()]
