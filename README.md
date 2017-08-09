@@ -24,6 +24,7 @@ Install-Module -Name GCTest -Force
 The GCTest module contains `Test-GC*` functions for simple True/False system tests.
 
 *   [Test-GCAdminShell](GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
+*   [Test-GCHostsFile](GCTest/Test-GCHostsFile.ps1): Existence and format tests against the local hosts file. 
 
 ### GCWindowsUpdate
 
