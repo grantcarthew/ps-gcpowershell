@@ -43,7 +43,6 @@ function Test-GCHostsFile {
   $hostsFileContent = Get-Content -Path $hostsFilePath
   foreach ($line in $hostsFileContent) {
     if ($line -notmatch $regexString) {
-      "This One: " + $line 
       $hostsFileOk = $false
     }
   }
