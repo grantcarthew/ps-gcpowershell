@@ -11,22 +11,16 @@
 
   The format checks are performed using the following
   regular expression:
-  '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*)(#+.*)*)$'
+  '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*[\w.]*\s*)(#+.*)*)$'
 
-  This regular expression translates to the following:
-  - Line is an empty line OR
-  - Line is one or more spaces OR
-  - Line has zero or more white space followed by a # OR
-  - Line has zero or more white space followed by
-    either digits, '.', ':', a-f, or A-F with white space followed by
-    zero or more #
+  Type 'Get-Help Test-GCHostsFile -Online' for extra information.
 .EXAMPLE
   This example returns True if the hosts file is in good condition.
 
   Test-GCHostsFile
 #>
 function Test-GCHostsFile {
-  [CmdletBinding()]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
   [Alias()]
   [OutputType([Boolean])]
   Param ()
@@ -34,7 +28,7 @@ function Test-GCHostsFile {
   $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath 'System32\drivers\etc\hosts'
   $hostsFileExists = $false
   $hostsFileOk = $true
-  $regexString = '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+\w+\s*[\w.]*\s*)(#+.*)*)$'
+  $regexString = '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*[\w.]*\s*)(#+.*)*)$'
 
   if (Test-Path -Path $hostsFilePath) {
     $hostsFileExists = $true
@@ -48,3 +42,4 @@ function Test-GCHostsFile {
   }
   return $hostsFileExists -and $hostsFileOk
 }
+Test-GCHostsFile

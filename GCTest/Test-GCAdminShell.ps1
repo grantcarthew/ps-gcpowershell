@@ -8,11 +8,12 @@
 
   This function will return True if the PowerShell console is running as Administrator, False otherwise.
 
+  Type 'Get-Help Test-GCAdminShell -Online' for extra information.
 .PARAMETER PrintError
   If this parameter is present a console error is reported if the console is not running as Administrator.
 #>
 function Test-GCAdminShell {
-  [CmdletBinding()]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
   [Alias()]
   [OutputType([Boolean])]
   Param(
