@@ -34,7 +34,7 @@ function Test-GCHostsFile {
   $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath 'System32\drivers\etc\hosts'
   $hostsFileExists = $false
   $hostsFileOk = $true
-  $regexString = '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*)(#+.*)*)$'
+  $regexString = '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+\w+\s*[\w.]*\s*)(#+.*)*)$'
 
   if (Test-Path -Path $hostsFilePath) {
     $hostsFileExists = $true
