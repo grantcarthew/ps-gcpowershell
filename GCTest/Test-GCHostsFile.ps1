@@ -13,6 +13,8 @@
   regular expression:
   '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*[\w.]*\s*)(#+.*)*)$'
 
+  For a detailed report in the console use -Verbose.
+
   Type 'Get-Help Test-GCHostsFile -Online' for extra information.
 .EXAMPLE
   This example returns True if the hosts file is in good condition.
@@ -21,7 +23,6 @@
 #>
 function Test-GCHostsFile {
   [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
-  [Alias()]
   [OutputType([Boolean])]
   Param ()
   
@@ -30,16 +31,32 @@ function Test-GCHostsFile {
   $hostsFileOk = $true
   $regexString = '^$|^\s*$|^(\s*#.*)$|^((\s*[\d.:a-fA-F]+\s+[\w.]+\s*[\w.]*\s*)(#+.*)*)$'
 
+  Write-Verbose -Message 'Checking Hosts file exists.'
+
   if (Test-Path -Path $hostsFilePath) {
     $hostsFileExists = $true
+  } else {
+    Write-Host -Object "Hosts file is missing." -ForegroundColor Red
   }
+
+  Write-Verbose -Message 'Reading Hosts file for inspection.'
 
   $hostsFileContent = Get-Content -Path $hostsFilePath
   foreach ($line in $hostsFileContent) {
+    Write-Verbose -Message "Inspecting Line: $line"
+
     if ($line -notmatch $regexString) {
+      Write-Verbose -Message "Invalid line in Hosts file: $line"
       $hostsFileOk = $false
     }
   }
-  return $hostsFileExists -and $hostsFileOk
+
+  if (-not $hostsFileOk) {
+    Write-Host -Object "Hosts file format is invalid." -ForegroundColor Red
+  }
+  Write-Verbose -Message "Hosts file exists: $hostsFileExists"
+  Write-Verbose -Message "Hosts file formatted correctly: $hostsFileOk"
+
+  $result = $hostsFileExists -and $hostsFileOk
+  Write-Output -InputObject $result
 }
-Test-GCHostsFile
