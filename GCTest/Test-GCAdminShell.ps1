@@ -11,7 +11,7 @@
   For a detailed report in the console use -Verbose.
 
   Type 'Get-Help Test-GCAdminShell -Online' for extra information.
-.PARAMETER PrintError
+.PARAMETER ShowError
   If this parameter is present a console error is reported if the console is not running as Administrator.
 #>
 function Test-GCAdminShell {
@@ -20,7 +20,7 @@ function Test-GCAdminShell {
   [OutputType([Boolean])]
   Param(
     [Switch]
-    $PrintError = $false
+    $ShowError = $false
   ) 
   
   $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -30,7 +30,7 @@ function Test-GCAdminShell {
   $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
   Write-Verbose -Message ("Running as Administrator: " + $isAdmin)
 
-  if ($PrintError -and -not $isAdmin) {
+  if ($ShowError -and -not $isAdmin) {
     Write-Error -Message "Please run this console as Administrator"
   }
 
