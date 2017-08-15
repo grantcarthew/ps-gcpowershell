@@ -27,7 +27,7 @@ function Start-GCWindowsUpdate {
   "Start-GCWindowsUpdate initiated"
   Import-Module -Name GCTest
 
-  if (Test-GCAdminShell -PrintError) {
+  if (Test-GCAdminShell -ShowError) {
     "Importing the PSWindowsUpdate module"
     Import-Module -Name PSWindowsUpdate
 

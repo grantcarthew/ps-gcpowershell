@@ -27,7 +27,7 @@ function Stop-GCWindowsUpdate {
   "Stop-GCWindowsUpdate initiated"
   Import-Module -Name GCTest
 
-  if (Test-GCAdminShell -PrintError) {
+  if (Test-GCAdminShell -ShowError) {
     "Stopping the Windows Update service"
     $wu = Get-Service -Name wuauserv
     Stop-Service -InputObject $wu
