@@ -6,7 +6,7 @@
   PowerShell console is not running As Administrator.
 
   Type 'Get-Help Open-GCHostsFile -Online' for extra information.
-.PARAMETER IgnoreWarning
+.PARAMETER Force
   Prevents both the display of the As Administrator console warning
   and the requirement to press enter.
 #>
@@ -18,10 +18,10 @@ function Open-GCHostsFile {
     [Parameter(Mandatory=$false,
                Position=0)]
     [Switch]
-    $IgnoreWarning
+    $Force
   )
   Import-Module -Name GCTest
-  if (-not (Test-GCAdminShell) -and -not $IgnoreWarning) {
+  if (-not (Test-GCAdminShell) -and -not $Force) {
     Write-Warning -Message "The PowerShell console is not running As Administrator. Changes to the hosts file will not be saved."
     Pause
   } 
