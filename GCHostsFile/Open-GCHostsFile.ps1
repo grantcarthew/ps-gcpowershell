@@ -21,10 +21,10 @@ function Open-GCHostsFile {
     $Force
   )
   Import-Module -Name GCTest
-  if (-not (Test-GCAdminShell) -and -not $Force) {
-    Write-Warning -Message "The PowerShell console is not running As Administrator. Changes to the hosts file will not be saved."
+  $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
+  if (-not (Test-GCFileWrite $hostsFilePath) -and -not $Force) {
+    Write-Warning -Message "The PowerShell session does not have write access to the hosts file. Changes will not be saved."
     Pause
   } 
-  $hostFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
-  Start-Process -FilePath 'notepad.exe' -ArgumentList $hostFilePath
+  Start-Process -FilePath 'notepad.exe' -ArgumentList $hostsFilePath
 }
