@@ -109,8 +109,6 @@ function Get-GCHostsFileEntry {
         } else {
           Write-Warning -Message "Invalid hosts file line: " + $line
         }
-      } else {
-        Write-Verbose -Message "Skipping single line comment."
       }
     }
   }
