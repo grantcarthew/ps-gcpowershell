@@ -122,7 +122,7 @@ function Get-GCHostsFileEntry {
       Write-output -InputObject $null
     }
 
-    Write-Host -Object "Total hosts entries: $($entries.Count)"
+    Write-Verbose -Message "Total hosts entries: $($entries.Count)"
     Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
   }
 }
