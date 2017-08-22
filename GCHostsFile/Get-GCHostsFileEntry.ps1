@@ -8,7 +8,7 @@
   The returned objects have the following schema:
   [PSCustomObject]@{
     IPAddress=[IPAddress];
-    HostName=[String[]];
+    HostNames=[String[]];
     Comment=[String];
   }
 
@@ -51,6 +51,8 @@ function Get-GCHostsFileEntry {
   )
   
   begin {
+    Write-Verbose -Message "Function initiated: $($MyInvocation.MyCommand)"
+
     $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
     Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
 
@@ -61,8 +63,10 @@ function Get-GCHostsFileEntry {
   }
   
   process {
-    Write-Verbose -Message "Processing with IPAddress: $IPAddress"
-    Write-Verbose -Message "Processing with HostName: $HostName"
+    if ($IPAddress) { Write-Verbose -Message "Filtering with IPAddress: $IPAddress" }
+    if ($HostName) { Write-Verbose -Message "Filtering with HostName: $HostName" }
+    if (-not $IPAddress -and -not $HostName) { Write-Verbose -Message "Retrieving all hosts file entries"}
+
     foreach ($line in $lines) {
       if ($line -notmatch '^$|^\s*$|^\s*#') {
         $comment = ''
@@ -73,6 +77,7 @@ function Get-GCHostsFileEntry {
           $comment = $line.Substring($hashIndex, $remainder)
           $content = $line.Substring(0, $hashIndex)
         }
+
         $lineElements.clear()
         $lineElements.AddRange($content.Trim() -split '\s+')
         if ($lineElements.Count -ge 2) {
@@ -101,7 +106,11 @@ function Get-GCHostsFileEntry {
               }
             ) | Out-Null
           }
+        } else {
+          Write-Warning -Message "Invalid hosts file line: " + $line
         }
+      } else {
+        Write-Verbose -Message "Skipping single line comment."
       }
     }
   }
@@ -114,5 +123,8 @@ function Get-GCHostsFileEntry {
     } else {
       Write-output -InputObject $null
     }
+
+    Write-Host -Object "Total hosts entries: $($entries.Count)"
+    Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
   }
 }
