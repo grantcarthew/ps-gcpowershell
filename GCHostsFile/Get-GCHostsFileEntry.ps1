@@ -9,9 +9,10 @@
   [PSCustomObject]@{
     IPAddress=[IPAddress];
     HostName=[String[]];
+    Comment=[String];
   }
 
-  Hosts file comments are ignored.
+  Hosts file single line comments are ignored.
 
   Type 'Get-Help Get-GCHostsFileEntry -Online' for extra information.
 .PARAMETER HostName
@@ -50,13 +51,8 @@ function Get-GCHostsFileEntry {
   )
   
   begin {
-    Import-Module -Name GCTest
     $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
     Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
-
-    if (-not (Test-GCHostsFile)) {
-      Write-Error -Message "Hosts file missing or the format is invalid. Please inspect the hosts file."
-    }
 
     Write-Verbose -Message "Getting content from hosts file."
     $lines = Get-Content -Path $hostsFilePath
@@ -69,30 +65,39 @@ function Get-GCHostsFileEntry {
     Write-Verbose -Message "Processing with HostName: $HostName"
     foreach ($line in $lines) {
       if ($line -notmatch '^$|^\s*$|^\s*#') {
+        $comment = ''
+        $content = $line
+        if ($line -match '#') {
+          $hashIndex = $line.IndexOf('#')
+          $remainder = $line.Length - $hashIndex
+          $comment = $line.Substring($hashIndex, $remainder)
+          $content = $line.Substring(0, $hashIndex)
+        }
         $lineElements.clear()
-        $lineElements.AddRange($line.Trim() -split '\s+')
+        $lineElements.AddRange($content.Trim() -split '\s+')
         if ($lineElements.Count -ge 2) {
-          $add = $false
+          $addReturnItem = $false
           if (-not $HostName -and -not $IPAddress) {
-            $add = $true
+            $addReturnItem = $true
           } elseif ($IPAddress -and $IPAddress.Trim() -eq $lineElements[0]) {
             Write-Verbose -Message "IPAddress match: $($lineElements[0])"
-            $add = $true
+            $addReturnItem = $true
           } else {
             for ($i = 1; $i -lt $lineElements.Count; $i++) {
               if ($HostName -and $HostName.Trim().ToUpper() -eq $lineElements[$i].ToUpper()) {
                 Write-Verbose -Message "HostName match: $($lineElements[$i])"
-                $add = $true
+                $addReturnItem = $true
               } 
             }
           }
-          if ($add) {
+          if ($addReturnItem) {
             $ip = $lineElements[0]
             $lineElements.RemoveAt(0)
             $entries.Add(
               [PSCustomObject]@{
                 IPAddress=[IPAddress]$ip;
-                HostName=[String[]]$lineElements.ToArray()
+                HostNames=[String[]]$lineElements.ToArray();
+                Comment=[String]$comment;
               }
             ) | Out-Null
           }
