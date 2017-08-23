@@ -90,7 +90,7 @@ function Add-GCHostsFileEntry {
     Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
 
     if (-not (Test-GCFileWrite -Path $hostsFilePath)) {
-      Write-Error -Message "Can not write to the hosts file. Check it exists and you have write permissions."
+      Write-Error -Message "Can't write to the hosts file. Check it exists and you have write permissions."
       Exit
     }
 
