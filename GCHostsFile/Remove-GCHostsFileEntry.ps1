@@ -1,113 +1,72 @@
 <#
 .SYNOPSIS
-  Returns any hosts file entries in the form of PSCustomObjects.
+  Remove a hosts file entry from the hosts file.
 .DESCRIPTION
-  Reads the contents of the %SYSTEMROOT%\System32\drivers\etc\hosts file
-  returning the results as an item or array of PS custom objects.
+  Unlike the other hosts file cmdlets, this function is a
+  simple line match and remove.
 
-  The returned objects have the following schema:
-  [PSCustomObject]@{
-    IPAddress=[IPAddress];
-    HostName=[String[]];
-  }
-
-  Hosts file comments are ignored.
-
-  Type 'Get-Help Get-GCHostsFileEntry -Online' for extra information.
-.PARAMETER HostName
-  Filters the result by host name. Supports a single
-  host name value or an array of host names.
-.PARAMETER IPAddress
-  Filters the result by host ip address. Supports a single
-  ip address or an array of ip addresses.
+  Type 'Get-Help Remove-GCHostsFileEntry -Online' for extra information.
+.PARAMETER Target
+  The search string to remove from the hosts file.
+  Regular expressions are supported.
 .EXAMPLE
-  The following example gets the list of IP addresses in the hosts file
-  and stores them as strings into the $ip variable:
+  The following example removes any lines in the hosts file
+  that match the target string:
 
-  $entries = Get-GCHostFileEntry
-  $ip = $entries.IPAddress.IPAddressToString
+  Remove-GCHostFileEntry -Target "abc.net.au"
+.EXAMPLE
+  The following example will remove all empty lines from
+  the hosts file:
+
+  Remove-GCHostsFileEntry -Target '^$'
 #>
-function Get-GCHostsFileEntry {
-  [CmdletBinding(DefaultParameterSetName='ByName',
-                 HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
-  [OutputType([PSCustomObject[]])]
+function Remove-GCHostsFileEntry {
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [OutputType([Int])]
   Param (
-    [Parameter(Mandatory=$false,
+    [Parameter(Mandatory=$true,
                Position=0,
-               ValueFromPipeline=$true,
-               ValueFromPipelineByPropertyName=$true,
-               ParameterSetName='ByName')]
+               ValueFromPipeline=$false)]
+    [ValidateNotNullOrEmpty()]
     [String[]]
-    $HostName,
-    
-    [Parameter(Mandatory=$false,
-               Position=0,
-               ValueFromPipeline=$true,
-               ValueFromPipelineByPropertyName=$true,
-               ParameterSetName='ByIP')]
-    [String[]]
-    $IPAddress
+    $Target
   )
   
-  begin {
-    Import-Module -Name GCTest
-    $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
-    Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
-
-    if (-not (Test-GCHostsFile)) {
-      Write-Error -Message "Hosts file missing or the format is invalid. Please inspect the hosts file."
-    }
-
-    Write-Verbose -Message "Getting content from hosts file."
-    $lines = Get-Content -Path $hostsFilePath
-    $entries = New-Object -TypeName System.Collections.ArrayList
-    $lineElements = New-Object -TypeName System.Collections.ArrayList
-  }
+  Write-Verbose -Message "Function initiated: $($MyInvocation.MyCommand)"
+  Import-Module -Name GCTest
   
-  process {
-    Write-Verbose -Message "Processing with IPAddress: $IPAddress"
-    Write-Verbose -Message "Processing with HostName: $HostName"
+  $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
+  Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
+
+  if (-not (Test-GCFileWrite -Path $hostsFilePath)) {
+    Write-Error -Message "Can't write to the hosts file. Check it exists and you have write permissions."
+  }
+
+  Write-Verbose -Message "Getting content from hosts file."
+  $lines = Get-Content -Path $hostsFilePath
+  $output = New-Object -TypeName System.Collections.ArrayList
+
+  if ($lines.length -lt 1) {
+    Write-Output -InputObject "Hosts file is empty. No change."
+    Exit
+  } else {
+    Write-Verbose -Message "Cleaning Target from hosts: $Target"
     foreach ($line in $lines) {
-      if ($line -notmatch '^$|^\s*$|^\s*#') {
-        $lineElements.clear()
-        $lineElements.AddRange($line.Trim() -split '\s+')
-        if ($lineElements.Count -ge 2) {
-          $add = $false
-          if (-not $HostName -and -not $IPAddress) {
-            $add = $true
-          } elseif ($IPAddress -and $IPAddress.Trim() -eq $lineElements[0]) {
-            Write-Verbose -Message "IPAddress match: $($lineElements[0])"
-            $add = $true
-          } else {
-            for ($i = 1; $i -lt $lineElements.Count; $i++) {
-              if ($HostName -and $HostName.Trim().ToUpper() -eq $lineElements[$i].ToUpper()) {
-                Write-Verbose -Message "HostName match: $($lineElements[$i])"
-                $add = $true
-              } 
-            }
-          }
-          if ($add) {
-            $ip = $lineElements[0]
-            $lineElements.RemoveAt(0)
-            $entries.Add(
-              [PSCustomObject]@{
-                IPAddress=[IPAddress]$ip;
-                HostName=[String[]]$lineElements.ToArray()
-              }
-            ) | Out-Null
-          }
-        }
+      if ($line -notmatch $Target) {
+        $output.Add($line) | Out-Null
       }
     }
   }
-  
-  end {
-    if ($entries.Count -eq 1) {
-      Write-Output -InputObject $entries[0]
-    } elseif ($entries.Count -gt 1) {
-      Write-Output -InputObject $entries
-    } else {
-      Write-output -InputObject $null
-    }
+
+  if ($output.Count -lt 1) {
+    Write-Verbose -Message "Nothing to write to the hosts file. No change."
+  } else {
+    Write-Verbose -Message "Writing new hosts file"
+    Set-Content -Path $hostsFilePath -Value $output -Force
   }
+  Write-Verbose -Message "Total lines before : $($lines.Length)"
+  Write-Verbose -Message "Total lines after  : $($output.Count)"
+  Write-Verbose -Message "Total lines removed: $($lines.Length - $output.Count)"
+  Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
 }
+Remove-GCHostsFileEntry -Target '^$' -Verbose
