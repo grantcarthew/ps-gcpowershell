@@ -93,23 +93,27 @@ function Install-GCHostsFileBlockList {
   Write-Verbose -Message "Temp file path set to: $tempFilePath"
 
   # The use of the temp file is to insert CR-LF.
-  Write-Verbose -Message "Downloading block list"
-  Invoke-WebRequest -Uri $url -ContentType 'text/plain' -UseBasicParsing -OutFile $tempFilePath
-  $blockList = Get-Content -Path $tempFilePath -Force
-  if ($Append) {
-    if ((Get-Content -Path $hostsFilePath -Raw) -notmatch "`r`n$") {
-      Write-Verbose -Message "Adding CR-LF to the end of the hosts file."
-      Add-Content -Path $hostsFilePath -Value '' -Encoding Ascii -Force
+  try {
+    Write-Verbose -Message "Downloading block list"
+    Invoke-WebRequest -Uri $url -ContentType 'text/plain' -UseBasicParsing -OutFile $tempFilePath
+    $blockList = Get-Content -Path $tempFilePath -Force
+    if ($Append) {
+      if ((Get-Content -Path $hostsFilePath -Raw) -notmatch "`r`n$") {
+        Write-Verbose -Message "Adding CR-LF to the end of the hosts file."
+        Add-Content -Path $hostsFilePath -Value '' -Encoding Ascii -Force
+      }
+      Write-Verbose -Message "Appending block list to the end of the hosts file."
+      Out-File -FilePath $hostsFilePath -InputObject $blockList -Encoding Ascii -Append -Force
+    } else {
+      Write-Verbose -Message "Replacing hosts file with the block list."
+      Out-File -FilePath $hostsFilePath -InputObject $blockList -Encoding Ascii -Force
     }
-    Write-Verbose -Message "Appending block list to the end of the hosts file."
-    Out-File -FilePath $hostsFilePath -InputObject $blockList -Encoding Ascii -Append -Force
-  } else {
-    Write-Verbose -Message "Replacing hosts file with the block list."
-    Out-File -FilePath $hostsFilePath -InputObject $blockList -Encoding Ascii -Force
+
+    Remove-Item -Path $tempFilePath -Force -ErrorAction SilentlyContinue
+    Write-Verbose -Message "Total block list hosts entries added: $($blockList.Length)"
+  } catch {
+    Write-Error -Exception $Error[0].Exception
   }
 
-  Remove-Item -Path $tempFilePath -Force -ErrorAction SilentlyContinue
-
-  Write-Verbose -Message "Total block list hosts entries added: $($blockList.Length)"
   Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
 }
