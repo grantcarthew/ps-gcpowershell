@@ -22,12 +22,20 @@ function Clear-GCHostsFile {
     [Switch]
     $Force
   )
+  Write-Verbose -Message "Function initiated: $($MyInvocation.MyCommand)"
   Import-Module -Name GCTest
+
   $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
+  Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
 
   if (-not (Test-GCFileWrite -Path $hostsFilePath)) {
-    throw "PowerShell session does not have write access to the hosts file."
+      Write-Error -Message "Can't write to the hosts file. Check it exists and you have write permissions."
+      Exit
   } else {
-    Clear-Content -Path $hostsFilePath -Confirm:(-not $Force) -Force
+    Write-Verbose -Message "Clearing the hosts file."
+    $pleaseConfirm = -not $Force
+    Clear-Content -Path $hostsFilePath -Confirm:$pleaseConfirm -Force
   }
+
+  Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
 }
