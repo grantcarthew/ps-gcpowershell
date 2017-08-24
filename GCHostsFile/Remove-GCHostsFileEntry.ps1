@@ -69,4 +69,3 @@ function Remove-GCHostsFileEntry {
   Write-Verbose -Message "Total lines removed: $($lines.Length - $output.Count)"
   Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
 }
-Remove-GCHostsFileEntry -Target '^$' -Verbose
