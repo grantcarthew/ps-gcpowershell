@@ -30,7 +30,6 @@ function Export-GCHostsFile {
     $Force
   )
   Write-Verbose -Message "Function initiated: $($MyInvocation.MyCommand)"
-  Import-Module -Name GCTest
 
   $hostsFilePath = Join-Path -Path $env:SystemRoot -ChildPath '\System32\drivers\etc\hosts'
   Write-Verbose -Message "Hosts file path set to: $hostsFilePath"
