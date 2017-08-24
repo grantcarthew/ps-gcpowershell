@@ -8,8 +8,9 @@
 
   Type 'Get-Help Export-GCHostsFile -Online' for extra information.
 .PARAMETER Path
-  The destination path including file name to export the
-  existing hosts file.
+  The destination path to export the existing hosts file.
+  If the destination is directory then the resulting file will
+  be named the 'hosts' file.
 .PARAMETER Force
   Prevents the confirmation dialog if the destination file
   already exists.
