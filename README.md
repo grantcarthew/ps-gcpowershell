@@ -12,8 +12,33 @@ To prevent function name collisions, every function has a prefix of `GC` being m
 
 Following is a list of the modules within this repository. For details of what each module and function does click the hyperlinks to read the module description and function help in the source code.
 
+*   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
 *   [GCTest](#gctest): Basic True/False system tests.
 *   [GCWindowsUpdate](#gcwindowsupdate): Control the Windows Update background service.
+
+### GCHostsFile
+
+```posh
+Install-Module -Name GCHostsFile -Force
+```
+
+The GCHostsFile module contains a number of functions to help you manage the hosts file on the Windows platform.
+
+The hosts file is the first place Windows checks for name resolution. It is loaded into the DNS cache whenever it gets updated.
+
+Read more about the hosts file on [Wikipedia](https://en.wikipedia.org/wiki/Hosts_(file))
+
+The GCHostsFile module contains the following functions:
+
+*   [Add-GCHostsFileEntry](GCHostsFile/Add-GCHostsFileEntry.ps1): Add host entries to the hosts file.
+*   [Clear-GCHostsFile](GCHostsFile/Clear-GCHostsFile.ps1): Delete all contents of the hosts file.
+*   [Export-GCHostsFile](GCHostsFile/Export-GCHostsFile.ps1): Create a copy of the hosts file.
+*   [Get-GCHostsFileEntry](GCHostsFile/Get-GCHostsFileEntry.ps1): Retrieve hosts file entries as PSCustomObjects.
+*   [Import-GCHostsFile](GCHostsFile/Import-GCHostsFile.ps1): Replaces the hosts file with a source files contents.
+*   [Install-GCHostsFileBlockList](GCHostsFile/Install-GCHostsFileBlockList.ps1): Installs a block list managed by [Steven Black](https://github.com/StevenBlack/hosts).
+*   [Open-GCHostsFile](GCHostsFile/Open-GCHostsFile.ps1): Opens the hosts file in notepad.exe.
+*   [Remove-GCHostsFileEntry](GCHostsFile/Remove-GCHostsFileEntry.ps1): Removes entries from the hosts file using filters.
+*   [Set-GCHostsFileEntry](GCHostsFile/Set-GCHostsFileEntry.ps1): Updates or adds hosts file entries. 
 
 ### GCTest
 
