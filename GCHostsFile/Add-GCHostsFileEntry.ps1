@@ -103,8 +103,8 @@ function Add-GCHostsFileEntry {
     $newEntries = New-Object -TypeName System.Collections.ArrayList
     $allHostNames = New-Object -TypeName System.Collections.ArrayList
     foreach ($entry in $hostsFileEntries) {
-      foreach ($n in $entry.HostNames) {
-        $allHostNames.Add($n.ToUpper().Trim()) | Out-Null
+      foreach ($name in $entry.HostNames) {
+        $allHostNames.Add($name.ToUpper().Trim()) | Out-Null
       }
     }
     function TestNewHostsIP ($NewIP) {
@@ -125,7 +125,7 @@ function Add-GCHostsFileEntry {
       Write-Output -InputObject $duplicate
     }
     function QueueNewHostsEntry ($NewIp, $NewNames, $NewComment) {
-      Write-Verbose -Message "Adding new entry: $NewIp,$NewNames,$NewComment"
+      Write-Verbose -Message "Queuing new entry: $NewIp,$NewNames,$NewComment"
       $tab1 = 17
       $newEntry = $NewIp.PadRight($tab1)
       foreach ($NewName in $NewNames) {
@@ -147,7 +147,6 @@ function Add-GCHostsFileEntry {
     } elseif ($InputObject) {
       foreach ($obj in $InputObject) {
         TestNewHostsIP -NewIP $obj.IPAddress.IPAddressToString
-        $obj
         if (TestDuplicateHostName -NewHostName $obj.HostNames) {
           Write-Warning -Message "Host name already exists: $($obj.HostNames)"
         } else {
