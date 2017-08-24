@@ -9,6 +9,8 @@
 .PARAMETER Path
   The source path including file name to replace the
   existing hosts file.
+.PARAMETER Force
+  Prevents the confirmation dialog from being displayed.
 #>
 function Import-GCHostsFile {
   [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
