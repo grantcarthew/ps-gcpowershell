@@ -8,6 +8,34 @@ This repository contains a collection of PowerShell modules that contain tools t
 
 To prevent function name collisions, every function has a prefix of `GC` being my initials.
 
+## Installation
+
+All of the PowerShell modules in this repository have been published to the [PowerShell Gallery](https://www.powershellgallery.com/items?q=grantcarthew). This makes the installation of the modules extremely easy.
+
+Judging from the [PowerShellGet repository](https://github.com/PowerShell/PowerShellGet) you should be able to install these modules as long as you have PowerShell v3.0 or later installed on your Windows platform. To see what version of PowerShell you have running, open PowerShell and issue the command `$host` taking note of the version value.
+
+If you wish to upgrade PowerShell on your system see the [Windows Management Framework](https://docs.microsoft.com/en-us/powershell/wmf/readme) page.
+
+### Installation Steps
+
+1.   Open PowerShell [As Administrator](https://www.google.com.au/search?q=open+powershell+as+administrator) and type the following commands.
+2.   `Install-PackageProvider -Name NuGet -Force`
+     *   This command installs support for the PowerShell Gallery.
+     *   This is only needed to be executed once on each system.
+3.   `Install-Module -Name <GC Module Name> -Force`
+     *   Replace `<GC Module Name>` with the module you want to install.
+
+That's all it takes. You can now execute any of the functions listed in the installed modules from PowerShell.
+
+To verify the installed modules type the following command into PowerShell:
+
+```posh
+Get-Module -ListAvailable -Name GC*
+```
+
+Some of the modules have other dependencies so you may see more than one of the `GC*` modules installed.
+
+
 ## Module List
 
 Following is a list of the modules within this repository. For details of what each module and function does click the hyperlinks to read the module description and function help in the source code.
@@ -49,7 +77,7 @@ Install-Module -Name GCTest -Force
 The GCTest module contains `Test-GC*` functions for simple True/False system tests.
 
 *   [Test-GCAdminShell](GCTest/Test-GCAdminShell.ps1): Test the console to see if it is running 'as Administrator'.
-*   [Test-GCHostsFile](GCTest/Test-GCHostsFile.ps1): Existence and format tests against the local hosts file. 
+*   [Test-GCFileWrite](GCTest/Test-GCFileWrite.ps1): Test for write permissions on a file. 
 
 ### GCWindowsUpdate
 
