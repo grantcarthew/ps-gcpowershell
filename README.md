@@ -7,16 +7,10 @@ To prevent function name collisions, every function has a prefix of `GC` being m
 ## Documentation
 
 *   [Installation](#installation)
+*   [Modules](#modules)
 *   [Contributing](CONTRIBUTING.md)
 *   [Code of Conduct](CODE_OF_CONDUCT.md)
 *   [License](LICENSE.md)
-
-Modules:
-
-*   [GCDialog](#gcdialog): User interface components for building scripts.
-*   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
-*   [GCTest](#gctest): Basic True/False system tests.
-*   [GCWindowsUpdate](#gcwindowsupdate): Control the Windows Update background service.
 
 ## Installation
 
@@ -44,6 +38,13 @@ Get-Module -ListAvailable -Name GC*
 ```
 
 Some of the modules have other dependencies so you may see more than one of the `GC*` modules installed.
+
+## Modules
+
+*   [GCDialog](#gcdialog): User interface components for building scripts.
+*   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
+*   [GCTest](#gctest): Basic True/False system tests.
+*   [GCWindowsUpdate](#gcwindowsupdate): Control the Windows Update background service.
 
 ### GCDialog
 
