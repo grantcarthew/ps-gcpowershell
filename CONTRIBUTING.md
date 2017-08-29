@@ -1,4 +1,4 @@
-# Contributing to the GCPowerShell Repository
+# Contributing
 
 If you wish to contribute to the GCPowerShell modules please do so. If it is a minor fix or typo just send a pull request. If you want to make large changes to the project create a new issue and explain your ideas.
 
