@@ -209,7 +209,7 @@ function Set-GCHostsFileEntry {
     Write-Verbose -Message "Total new entries    : $($newEntries.Count)"
     Write-Verbose -Message "Total lines changed  : $($updateEntries.Count + $newEntries.Count)"
     Write-Verbose -Message "Total lines written  : $($output.Count)"
-    Start-Process -FilePath "notepad.exe" -ArgumentList $hostsFilePath
+
     Write-Verbose -Message "Function completed: $($MyInvocation.MyCommand)"
   }
 
