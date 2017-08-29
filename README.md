@@ -10,7 +10,7 @@ To prevent function name collisions, every function has a prefix of `GC` being m
 *   [Modules](#modules)
 *   [Contributing](CONTRIBUTING.md)
 *   [Code of Conduct](CODE_OF_CONDUCT.md)
-*   [License](LICENSE.md)
+*   [License](LICENSE)
 
 ## Installation
 
