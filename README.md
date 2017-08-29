@@ -4,7 +4,14 @@ This repository contains a collection of PowerShell modules that contain tools t
 
 To prevent function name collisions, every function has a prefix of `GC` being my initials.
 
-Following is a list of the modules within this repository. For details of what each module and function does click the hyperlinks to read the module description and function help in the source code.
+Documentation:
+
+*   [Installation](#installation)
+*   [Contributing](CONTRIBUTING.md)
+*   [Code of Conduct](CODE_OF_CONDUCT.md)
+*   [License](LICENSE.md)
+
+Modules:
 
 *   [GCDialog](#gcdialog): User interface components for building scripts.
 *   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
