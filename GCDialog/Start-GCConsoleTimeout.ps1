@@ -8,6 +8,8 @@
   If the timeout completes True is returned.
   If CancelWithEsc is enabled and the user hits the Escape
   key then False is returned.
+
+  Type 'Get-Help Start-GCConsoleTimeout -Online' for extra information.
 .PARAMETER Seconds
   The number of seconds to delay processing before continuing.
 .PARAMETER Activity

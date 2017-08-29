@@ -9,6 +9,8 @@
   If the user presses Button1 then the text on Button1 is returned.
   If the user presses Button2 then the text on Button2 is returned.
   If the message box times out then the string TIMEOUT is returned.
+
+  Type 'Get-Help Start-GCTimeoutDialog -Online' for extra information.
 .PARAMETER Title
   The title of the message box.
 
@@ -39,7 +41,7 @@ Default Button1Text is "OK".
 Start-GCTimeoutDialog -Title "Shutdown" -Message "This system will shutdown in 50 minutes." -Seconds 3000
 #> 
 function Start-GCTimeoutDialog {
-  [CmdletBinding()]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
   [OutputType([String])]
   Param (
   [Parameter(Mandatory=$false)]
