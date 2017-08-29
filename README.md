@@ -1,12 +1,15 @@
 # GCPowerShell
 
-An assortment of PowerShell modules
-
-## Description
-
 This repository contains a collection of PowerShell modules that contain tools to help you work with the Windows platform. The modules have been published to the [PowerShell Gallery](https://www.powershellgallery.com/items?q=grantcarthew).
 
 To prevent function name collisions, every function has a prefix of `GC` being my initials.
+
+Following is a list of the modules within this repository. For details of what each module and function does click the hyperlinks to read the module description and function help in the source code.
+
+*   [GCDialog](#gcdialog): User interface components for building scripts.
+*   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
+*   [GCTest](#gctest): Basic True/False system tests.
+*   [GCWindowsUpdate](#gcwindowsupdate): Control the Windows Update background service.
 
 ## Installation
 
@@ -35,14 +38,18 @@ Get-Module -ListAvailable -Name GC*
 
 Some of the modules have other dependencies so you may see more than one of the `GC*` modules installed.
 
+### GCDialog
 
-## Module List
+```posh
+Install-Module -Name GCDialog -Force
+```
 
-Following is a list of the modules within this repository. For details of what each module and function does click the hyperlinks to read the module description and function help in the source code.
+The GCDialog module contains user interface functions to help you build scripts that require user input.
 
-*   [GCHostsFile](#gchostsfile): Hosts file management tools for local name resolution.
-*   [GCTest](#gctest): Basic True/False system tests.
-*   [GCWindowsUpdate](#gcwindowsupdate): Control the Windows Update background service.
+The GCDialog module contains the following functions:
+
+*   [Start-GCConsoleTimeout](GCDialog/Start-GCConsoleTimeout.ps1): Console based timeout progress bar with cancel support.
+*   [Start-GCTimeoutDialog](GCDialog/Start-GCTimeoutDialog.ps1): WPF based timeout window with time remaining and two buttons support.
 
 ### GCHostsFile
 
