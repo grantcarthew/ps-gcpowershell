@@ -24,6 +24,8 @@ If you wish to upgrade PowerShell on your system see the [Windows Management Fra
 
 1.   Open PowerShell [As Administrator](https://www.google.com.au/search?q=open+powershell+as+administrator) and type the following commands.
 1.   `Set-ExecutionPolicy -ExecutionPolicy Unrestricted`
+     *   This command changes the PowerShell [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1).
+     *   This is only needed to be executed once on each system.
 1.   `Install-PackageProvider -Name NuGet -Force`
      *   This command installs support for the PowerShell Gallery.
      *   This is only needed to be executed once on each system.
