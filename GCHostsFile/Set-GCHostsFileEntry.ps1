@@ -37,7 +37,7 @@
   #>
 function Set-GCHostsFileEntry {
   [CmdletBinding(DefaultParameterSetName='HostEntry',
-                HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+                HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([String])]
   Param (
     [Parameter(Mandatory=$false,

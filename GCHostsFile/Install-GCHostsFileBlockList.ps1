@@ -27,7 +27,7 @@
   Install-GCHostFileBlockList -Extensions FakeNews
 #>
 function Install-GCHostsFileBlockList {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([Int])]
   Param (
     [Parameter(Mandatory=$false,

@@ -11,7 +11,7 @@
   and the requirement to press enter.
 #>
 function Open-GCHostsFile {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [Alias()]
   [OutputType([String])]
   Param (

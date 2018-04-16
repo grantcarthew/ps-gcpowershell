@@ -30,7 +30,7 @@
   Get-ChildItem | Select -ExpandProperty FullName | Test-GCFileWrite
 #>
 function Test-GCFileWrite {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([Boolean])]
   Param (
     [Parameter(Mandatory=$true,

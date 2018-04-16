@@ -30,7 +30,7 @@
 #>
 function Get-GCHostsFileEntry {
   [CmdletBinding(DefaultParameterSetName='ByName',
-                 HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+                 HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([PSCustomObject[]])]
   Param (
     [Parameter(Mandatory=$false,

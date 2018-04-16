@@ -28,7 +28,7 @@
   The default value is 100ms.
 #>
 function Start-GCConsoleTimeout {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([Boolean])]
   Param (
     [Parameter(Mandatory=$true)]

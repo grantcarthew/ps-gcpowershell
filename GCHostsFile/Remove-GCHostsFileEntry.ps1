@@ -21,7 +21,7 @@
   Remove-GCHostsFileEntry -Target '^$'
 #>
 function Remove-GCHostsFileEntry {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([Int])]
   Param (
     [Parameter(Mandatory=$true,

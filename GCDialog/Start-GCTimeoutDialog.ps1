@@ -41,7 +41,7 @@ Default Button1Text is "OK".
 Start-GCTimeoutDialog -Title "Shutdown" -Message "This system will shutdown in 50 minutes." -Seconds 3000
 #> 
 function Start-GCTimeoutDialog {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [OutputType([String])]
   Param (
   [Parameter(Mandatory=$false)]

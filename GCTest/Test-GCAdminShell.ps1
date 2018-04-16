@@ -15,7 +15,7 @@
   If this parameter is present a console error is reported if the console is not running as Administrator.
 #>
 function Test-GCAdminShell {
-  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/GCPowerShell')]
+  [CmdletBinding(HelpUri = 'https://github.com/grantcarthew/ps-gcpowershell')]
   [Alias()]
   [OutputType([Boolean])]
   Param(
