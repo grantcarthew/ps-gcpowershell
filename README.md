@@ -23,10 +23,13 @@ If you wish to upgrade PowerShell on your system see the [Windows Management Fra
 ### Installation Steps
 
 1.   Open PowerShell [As Administrator](https://www.google.com.au/search?q=open+powershell+as+administrator) and type the following commands.
-2.   `Install-PackageProvider -Name NuGet -Force`
+1.   `Set-ExecutionPolicy -ExecutionPolicy Unrestricted`
+     *   This command changes the PowerShell [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1).
+     *   This is only needed to be executed once on each system.
+1.   `Install-PackageProvider -Name NuGet -Force`
      *   This command installs support for the PowerShell Gallery.
      *   This is only needed to be executed once on each system.
-3.   `Install-Module -Name <GC Module Name> -Force`
+1.   `Install-Module -Name <GC Module Name> -Force`
      *   Replace `<GC Module Name>` with the module you want to install.
 
 That's all it takes. You can now execute any of the functions listed in the installed modules from PowerShell.
